@@ -4,14 +4,13 @@ import React, { useState } from 'react'
 import Child from './Child'
 
 const App = () => {
-  const [parameters, setParameters] = useState()
-  const [childData, setChildData] = useState('')
+  const [parameters, setParameters] = useState(0)
+  const [childData, setChildData] = useState()
+  const [userInput, setUserInput] = useState('')
 
   const parentMethod = (data) => {
-    console.log('TEST METHOD FROM PARENT')
-    // setParameters(parameters + 1)
-    // console.log(parameters)
-    setParameters({ parameters: data })
+    setParameters(parameters + 1)
+    console.log(parameters)
   }
 
   const nextParentMethod = (e) => {
@@ -19,12 +18,21 @@ const App = () => {
     console.log(childData)
   }
 
+  const handleSubmitForm = (e) => {
+    setUserInput(e.target.value)
+    console.log(userInput)
+
+  }
 
   return (
     <div>
-      <p> Test </p>
-      <Child MethodFromParent={parentMethod} NextMethodFromParent={nextParentMethod}> </Child>
+      <Child
+        MethodFromParent={parentMethod}
+        NextMethodFromParent={nextParentMethod}
+        HandleSubmit={handleSubmitForm}>
+      </Child>
       <h1> {childData} </h1>
+      <h2> {userInput} </h2>
     </div>
   )
 }
