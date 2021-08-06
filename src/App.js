@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import React, { useState } from 'react'
+import Child from './Child'
+
+const App = () => {
+  const [parameters, setParameters] = useState()
+  const [childData, setChildData] = useState('')
+
+  const parentMethod = (data) => {
+    console.log('TEST METHOD FROM PARENT')
+    // setParameters(parameters + 1)
+    // console.log(parameters)
+    setParameters({ parameters: data })
+  }
+
+  const nextParentMethod = (e) => {
+    setChildData(e.target.value)
+    console.log(childData)
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p> Test </p>
+      <Child MethodFromParent={parentMethod} NextMethodFromParent={nextParentMethod}> </Child>
+      <h1> {childData} </h1>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
